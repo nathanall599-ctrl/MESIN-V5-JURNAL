@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MechLog — Masuk / Daftar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+    <div class="auth-bg-decor"></div>
+
+    <div class="auth-shell">
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <div class="auth-logo">⚙️ MechLog</div>
+                <h1 class="auth-hero">Sistem Pencatatan Kuliah<br/>Teknik Mesin</h1>
+                <p class="auth-desc">
+                    Kelola jadwal, tugas, materi, absensi, dan jurnal perkuliahan Anda dalam satu tempat yang rapi dan elegan.
+                </p>
+                <ul class="auth-features">
+                    <li><span>📅</span> Jadwal & Kalender Akademik</li>
+                    <li><span>📋</span> Modul Tugas & Materi</li>
+                    <li><span>📊</span> Rekap Absensi Otomatis</li>
+                    <li><span>📓</span> Jurnal Perkuliahan & Cetak PDF</li>
+                    <li><span>💰</span> Manajemen Keuangan Mahasiswa</li>
+                </ul>
+                <div class="auth-footer-note">v7.0 · Mechanical Engineering · 2026/2027</div>
+            </div>
+        </div>
+
+        <div class="auth-main">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Masuk</button>
+                    <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Daftar</button>
+                </div>
+
+                <!-- LOGIN PANEL -->
+                <div class="auth-panel active" id="panel-login">
+                    <h2 class="auth-panel-title">Selamat Datang Kembali 👋</h2>
+                    <p class="auth-panel-sub">Masuk untuk melanjutkan perkuliahan Anda</p>
+
+                    <form onsubmit="handleLogin(event)">
+                        <div class="auth-field">
+                            <label>Email</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon">📧</span>
+                                <input type="email" id="login-email" placeholder="nama@email.com" autocomplete="email" required />
+                            </div>
+                        </div>
+                        <div class="auth-field">
+                            <label>Password</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
+                                <button type="button" class="auth-toggle-pass" onclick="togglePassword('login-password', this)">👁</button>
+                            </div>
+                        </div>
+
+                        <div class="auth-error" id="login-error"></div>
+
+                        <button type="submit" class="auth-submit" id="login-btn">
+                            <span>Masuk</span>
+                            <span class="auth-submit-arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- REGISTER PANEL -->
+                <div class="auth-panel" id="panel-register">
+                    <h2 class="auth-panel-title">Buat Akun Baru ✨</h2>
+                    <p class="auth-panel-sub">Isi data Anda dengan benar untuk memulai</p>
+
+                    <form onsubmit="handleRegister(event)">
+                        <div class="auth-row">
+                            <div class="auth-field">
+                                <label>Nama Lengkap *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">👤</span>
+                                    <input type="text" id="reg-nama" placeholder="Nama lengkap" required />
+                                </div>
+                            </div>
+                            <div class="auth-field">
+                                <label>NIM *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">🆔</span>
+                                    <input type="text" id="reg-nim" placeholder="25-2120-XXX" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-row">
+                            <div class="auth-field">
+                                <label>Jurusan *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">🔧</span>
+                                    <input type="text" id="reg-jurusan" placeholder="Teknik Mesin" value="Teknik Mesin" required />
+                                </div>
+                            </div>
+                            <div class="auth-field">
+                                <label>Fakultas *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">🏛️</span>
+                                    <input type="text" id="reg-fakultas" placeholder="Teknik" value="Teknik" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-field">
+                            <label>Universitas *</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon">🎓</span>
+                                <input type="text" id="reg-universitas" placeholder="Universitas Negeri Manado" required />
+                            </div>
+                        </div>
+
+                        <div class="auth-field">
+                            <label>Email *</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon">📧</span>
+                                <input type="email" id="reg-email" placeholder="nama@email.com" autocomplete="email" required />
+                            </div>
+                        </div>
+
+                        <div class="auth-row">
+                            <div class="auth-field">
+                                <label>Password *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">🔒</span>
+                                    <input type="password" id="reg-password" placeholder="Min. 6 karakter" minlength="6" required />
+                                    <button type="button" class="auth-toggle-pass" onclick="togglePassword('reg-password', this)">👁</button>
+                                </div>
+                            </div>
+                            <div class="auth-field">
+                                <label>Konfirmasi Password *</label>
+                                <div class="auth-input-wrap">
+                                    <span class="auth-input-icon">🔒</span>
+                                    <input type="password" id="reg-password-confirm" placeholder="Ulangi password" minlength="6" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-error" id="register-error"></div>
+
+                        <button type="submit" class="auth-submit" id="register-btn">
+                            <span>Daftar Akun</span>
+                            <span class="auth-submit-arrow">→</span>
+                        </button>
+
+                        <p class="auth-terms">
+                            Dengan mendaftar, Anda menyetujui penggunaan data secara lokal di browser Anda.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-toast"><span id="auth-toast-icon">✅</span><span id="auth-toast-msg">Berhasil!</span></div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Redirect if already logged in
+        if (MechAuth.isLoggedIn()) {
+            window.location.href = 'app.html';
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+            document.querySelectorAll('.auth-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
+            document.getElementById('login-error').textContent = '';
+            document.getElementById('register-error').textContent = '';
+        }
+
+        function togglePassword(id, btn) {
+            const input = document.getElementById(id);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁';
+            }
+        }
+
+        function showToast(msg, type = 'success') {
+            const el = document.getElementById('auth-toast');
+            document.getElementById('auth-toast-icon').textContent = type === 'error' ? '❌' : '✅';
+            document.getElementById('auth-toast-msg').textContent = msg;
+            el.className = 'show ' + type;
+            setTimeout(() => { el.className = ''; }, 3000);
+        }
+
+        function setLoading(btn, loading, originalText) {
+            btn.disabled = loading;
+            btn.querySelector('span').textContent = loading ? 'Memproses...' : originalText;
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-password').value;
+            const err = document.getElementById('login-error');
+            const btn = document.getElementById('login-btn');
+            err.textContent = '';
+            setLoading(btn, true, 'Masuk');
+            try {
+                await MechAuth.login(email, pass);
+                window.location.href = 'app.html';
+            } catch (ex) {
+                err.textContent = '❌ ' + ex.message;
+                setLoading(btn, false, 'Masuk');
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const err = document.getElementById('register-error');
+            const btn = document.getElementById('register-btn');
+            err.textContent = '';
+            const data = {
+                nama: document.getElementById('reg-nama').value.trim(),
+                nim: document.getElementById('reg-nim').value.trim(),
+                jurusan: document.getElementById('reg-jurusan').value.trim(),
+                fakultas: document.getElementById('reg-fakultas').value.trim(),
+                universitas: document.getElementById('reg-universitas').value.trim(),
+                email: document.getElementById('reg-email').value.trim(),
+                password: document.getElementById('reg-password').value,
+                confirm: document.getElementById('reg-password-confirm').value
+            };
+            if (data.password !== data.confirm) {
+                err.textContent = '❌ Konfirmasi password tidak cocok';
+                return;
+            }
+            setLoading(btn, true, 'Daftar Akun');
+            try {
+                await MechAuth.register(data.email, data.password, {
+                    nama: data.nama,
+                    nim: data.nim,
+                    jurusan: data.jurusan,
+                    fakultas: data.fakultas,
+                    universitas: data.universitas
+                });
+                showToast('Akun berhasil dibuat! Silakan masuk.');
+                setTimeout(() => {
+                    switchAuthTab('login');
+                    document.getElementById('login-email').value = data.email;
+                    document.getElementById('login-password').focus();
+                }, 900);
+            } catch (ex) {
+                err.textContent = '❌ ' + ex.message;
+                setLoading(btn, false, 'Daftar Akun');
+            }
+        }
+    </script>
+</body>
+</html>
